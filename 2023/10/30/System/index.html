@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="April Sky">
+
+
+
+
+
+<title>System | Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Fengli&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about/index.html">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Fengli&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about/index.html">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">System</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">April Sky</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 30, 2023&nbsp;&nbsp;17:05:17</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/System/">System</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="存储与装载"><a href="#存储与装载" class="headerlink" title="存储与装载"></a>存储与装载</h1><p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled.png" alt="Untitled"></p>
+<h1 id="1-缓存机制"><a href="#1-缓存机制" class="headerlink" title="1. 缓存机制"></a>1. 缓存机制</h1><p>无论是OS中的缓存-主存、主存-磁盘，还是Web应用中的Redis-Mysql，都是异曲同工的。</p>
+<h2 id="1-1-替换算法和一致性问题"><a href="#1-1-替换算法和一致性问题" class="headerlink" title="1.1 替换算法和一致性问题"></a>1.1 替换算法和一致性问题</h2><p>当 <code>A</code>和 <code>B</code>之间存在明显的速度差异时，可以考虑在它们中间加一个中间层 <code>C</code>，即<strong>缓存</strong>，如：</p>
+<blockquote>
+<p>▪️CPU和主存间的cache，cache是主存的缓存<br>▪️CPU和磁盘存储器间的主存，主存是磁盘存储器的缓存</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%201.png" alt="Untitled"></p>
+</blockquote>
+<p>我们将 <code>B</code>和 <code>C</code>中按相同大小分为好多块，<code>A</code>想要 <code>B</code>中某个块中数据时可以先访问 <code>C</code>中映射到的块，<code>C</code>中没有这个块再去 <code>B</code>中，把 <code>B</code>中的这个块的数据搬到 <code>C</code>中并访问</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%202.png" alt="Untitled"></p>
+<p>那么不可避免的就会带来问题：</p>
+<blockquote>
+<p>1️⃣上层memory容量是远少于下层的，需要进行块<strong>替换</strong><br>2️⃣多级memory相当于有多份数据，如何保证写操作时数据的<strong>一致性</strong></p>
+</blockquote>
+<h2 id="1-2-替换算法"><a href="#1-2-替换算法" class="headerlink" title="1.2 替换算法"></a>1.2 替换算法</h2><h3 id="1-2-1-先进先出算法FIFO"><a href="#1-2-1-先进先出算法FIFO" class="headerlink" title="1.2.1 先进先出算法FIFO"></a>1.2.1 先进先出算法FIFO</h3><p>▪️思想：谁最早进入内存，就淘汰谁，优先淘汰最早进入内存的页面</p>
+<p>▪️实现：把调入内存的页面根据先后次序链接成队列</p>
+<p>▪️缺点：不能反映程序局部性原理，最先访问的页面可能是最常用的</p>
+<h3 id="1-2-2-最近最少用算法LRU"><a href="#1-2-2-最近最少用算法LRU" class="headerlink" title="1.2.2 最近最少用算法LRU"></a>1.2.2 最近最少用算法LRU</h3><p>▪️思想：选择最近最少使用的主存块淘汰，即最长时间未访问的块</p>
+<p>▪️实现：为每个页面设置一个<strong>访问字段</strong>（计数器），记录页面自上次被访问以来所经历的时间（<strong>时间的本质是每次访问的块，块中计数器置0，其余块计数器+1</strong>），淘汰的时候<strong>淘汰访问字段最大</strong>的块</p>
+<p>▪️缺点：内存中的LRU是由硬件实现，实现困难一点</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%203.png" alt="Untitled"></p>
+<h2 id="1-3-一致性"><a href="#1-3-一致性" class="headerlink" title="1.3 一致性"></a>1.3 一致性</h2><p>读操作对一致性没有影响，只要多份数据备份中的数据保持一致，读的结果都一样</p>
+<p>解决一致性问题的关键是<strong>处理写操作</strong></p>
+<h3 id="1-3-1-全写法"><a href="#1-3-1-全写法" class="headerlink" title="1.3.1 全写法"></a>1.3.1 全写法</h3><p>全写法：写操作时，<strong>主存和缓存中数据都要更新</strong></p>
+<ol>
+<li>如果在缓存中<strong>写命中</strong>，同时写缓存和主存；</li>
+</ol>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%204.png" alt="Untitled"></p>
+<ol>
+<li><p>如果<strong>写不命中</strong>，分以下两种情况（<strong>区别在于更新主存后是否装入缓存</strong>）</p>
+<p>▪️写分配法：先在主存更新相应存储单元，然后分配一个缓存块，将更新后的主存装入到该缓存</p>
+<p>$\Longrightarrow$这种做法增加了装入时间</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%205.png" alt="Untitled"></p>
+<p>▪️非写分配法：仅更新主存相应存储单元，不装入到缓存</p>
+<p>$\Longrightarrow$这种做法减少了装入时间，但没有利用空间局部性</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%206.png" alt="Untitled"></p>
+</li>
+</ol>
+<p><strong>全写法的非写分配法其实就是Write Through机制</strong></p>
+<h3 id="1-3-2-回写法"><a href="#1-3-2-回写法" class="headerlink" title="1.3.2 回写法"></a>1.3.2 回写法</h3><p>回写法：写操作时，<strong>只在缓存中写，不更新主存</strong></p>
+<ol>
+<li>如果在缓存中写命中，信息只写入缓存不更新主存</li>
+</ol>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%207.png" alt="Untitled"></p>
+<ol>
+<li>如果写不命中，分配一个缓存块，将主存块装入到该缓存并在缓存中更新</li>
+</ol>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%208.png" alt="Untitled"></p>
+<p><strong>只有在缓存块要被替换掉时，才将该块的内容一次性写入主存</strong></p>
+<blockquote>
+<p>所以回写法需要在缓存行中设置一个<strong>脏位(dirty bit)</strong><br>▪️脏位为1说明该缓存被修改过，替换时需要写回主存<br>▪️脏位为0说明该缓存未被修改，替换时不用写回</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%209.png" alt="Untitled"></p>
+</blockquote>
+<h3 id="1-3-3-Cache-Aside机制"><a href="#1-3-3-Cache-Aside机制" class="headerlink" title="1.3.3 Cache Aside机制"></a>1.3.3 Cache Aside机制</h3><p>在日常使用诸如**<code>Redis</code><strong>中间件用用作数据库缓存时，我们是不可以通过</strong> <code>Redis</code><strong>写数据库的，因此我们日常使用写回法时需要引入额外的中间件</strong>消息队列**(<strong><code>Kafka</code></strong>)，但这会引入额外的复杂性和不稳定因素</p>
+<p>在更新数据的时候，先更新数据库，如果更新成功了，并不去尝试更新缓存，<strong>而是去删除缓存</strong>，缓存不存在就什么都不做</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2010.png" alt="Untitled"></p>
+<h1 id="1-为什么要分页式虚拟存储器？"><a href="#1-为什么要分页式虚拟存储器？" class="headerlink" title="1. 为什么要分页式虚拟存储器？"></a>1. 为什么要分页式虚拟存储器？</h1><h2 id="1-1-问题引入——存储器管理内存问题"><a href="#1-1-问题引入——存储器管理内存问题" class="headerlink" title="1.1 问题引入——存储器管理内存问题"></a>1.1 问题引入——存储器管理内存问题</h2><p>直接将物理内存分配给程序使用，计算机有128M内存，程序A运行需要10M，程序B运行需要100M，程序C运行需要20M，同时运行程序A和B，会出现以下3个问题：</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2011.png" alt="Untitled"></p>
+<ol>
+<li>程序运行地址不确定：每次将程序装入内存，分配的空闲区域都是不确定的</li>
+<li>地址空间不隔离：A很容易改写B的内存数据</li>
+<li>内存使用效率低：如果要运行C，只能将B从内存中移出</li>
+</ol>
+<h2 id="2-解决方法——虚拟地址"><a href="#2-解决方法——虚拟地址" class="headerlink" title="2. 解决方法——虚拟地址"></a>2. 解决方法——虚拟地址</h2><p>$\Longrightarrow$<strong>引入虚拟地址空间</strong>：把进程的所需要的虚拟空间映射到某个物理地址空间。</p>
+<p>A有$0x00000000-0x00A00000$的10M大小的虚拟空间，在实际物理内存分配$0x00100000-0x00B00000$的一块10M大小的空间，将两块空间一一映射，可以解决问题 1️⃣和 2️⃣。</p>
+<blockquote>
+<p>1️⃣<strong>虚拟地址到物理地址到映射由操作系统实现</strong>，用户只需按照地址$0x00000000-0x00A00000$编写程序即可，无需用户手动重定位；</p>
+</blockquote>
+<p>2️⃣如果程序A访问虚拟空间超过$0x00A00000$，则系统视为非法访问，实现地址隔离。</p>
+<p>但问题3️⃣还没有解决：还是按照程序为单位的内存映射方法，换入换出的是整个程序。根据程序局部性原理，只是频繁地用到一小部分数据，所以可以减小分割粒度。</p>
+<p>$<strong>\Longrightarrow$引入虚拟存储器分页式的实现</strong></p>
+<h1 id="2-分页式虚拟存储器"><a href="#2-分页式虚拟存储器" class="headerlink" title="2. 分页式虚拟存储器"></a>2. 分页式虚拟存储器</h1><h2 id="2-1-虚拟地址空间"><a href="#2-1-虚拟地址空间" class="headerlink" title="2.1 虚拟地址空间"></a>2.1 虚拟地址空间</h2><p>每个进程都拥有自己独立的虚拟地址空间，大小由CPU的位数决定，32位平台虚拟地址空间为4GB；C语言指针大小也由虚拟空间位数决定，32位平台指针为4字节。</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2012.png" alt="Untitled"></p>
+<p><strong>主存</strong>和<strong>虚拟地址空间</strong>被划分为大小相同的页面，<strong>磁盘</strong>和<strong>主存</strong>之间按页面为单位交换信息</p>
+<blockquote>
+<p>虚拟页 <code>VP</code>：虚拟空间的页<br>物理页 <code>PP</code>：物理内存的页<br>磁盘页 <code>DP</code>：磁盘中的页</p>
+</blockquote>
+<h2 id="2-2-虚拟存储的实质"><a href="#2-2-虚拟存储的实质" class="headerlink" title="2.2 虚拟存储的实质"></a>2.2 虚拟存储的实质</h2><p>程序想写多长就写多长（不超过逻辑空间大小即可），可执行文件放到物理磁盘，启动程序变为进程后就会调入主存空间，主存空间内只是这些程序的片段（当前活跃的部分）</p>
+<p>程序执行时，把当前需要的程序段和相应的数据块调入主存，其他暂不用的部分存放在磁盘上</p>
+<p>指令执行时，通过硬件将逻辑地址（也称虚拟地址）转化为物理地址（也称主存地址或实地址）</p>
+<p>在主存中的直接执行；如果不在主存里面，会触发缺页，要把操作系统喊过来，说主存里面找不到，由操作系统把数据从磁盘调入主存</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2013.png" alt="Untitled"></p>
+<h2 id="2-3-页表"><a href="#2-3-页表" class="headerlink" title="2.3 页表"></a>2.3 页表</h2><hr>
+<p><strong>这一段话很重要</strong></p>
+<p>每一个进程都有自己的页表，反映每一个虚页和物理空间之间的关系：</p>
+<blockquote>
+<p>1️⃣如果某个页在磁盘中，页表就会说这一页在磁盘的哪个位置；<br>2️⃣如果这个页在主存里，页表就会说这个页在主存的什么地方。</p>
+</blockquote>
+<p>页表反映了虚拟地址空间的每一页在磁盘或主存的什么地方，以及这一页是否是空页（如堆和栈中间的空洞），理想的页表会对每一页进行说明。</p>
+<hr>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2014.png" alt="Untitled"></p>
+<p>页表存放在进程虚拟地址空间的<strong>内核区</strong>，页表基址寄存器记录了页表在主存的首地址</p>
+<p><strong>页表每一行代表一个虚拟页，行的顺序即为虚拟页号顺序</strong></p>
+<ol>
+<li><p>$装入位valid+存放位置$：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (**装入位** == <span class="number">1</span>) &#123;</span><br><span class="line">		该页为<span class="string">&quot;缓存页&quot;</span>;</span><br><span class="line">		**存放位置字段**指向主存页框号（即物理页号）;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (**装入位** == <span class="number">0</span>) &#123;</span><br><span class="line">		该页没有调入内存;</span><br><span class="line">		<span class="keyword">if</span> (**存放位置字段** == null)</span><br><span class="line">				该页为<span class="string">&quot;未分配页&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				该页为<span class="string">&quot;未缓存页&quot;</span>;</span><br><span class="line">				**存放位置字段**指向该虚拟页在磁盘的起始地址;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>1️⃣<strong>未分配页</strong>：堆区和栈区动态生长，所以栈和共享库映射区、堆和共享库映射区之间可能没有内容存在，它们就是进程的虚拟地址空间中“空洞”对应的页</p>
+</blockquote>
+<p><strong>已分配页</strong>：代码和数据等有内容的区域所关联的页<br>2️⃣缓存页：已调入主存的页面<br>3️⃣未缓存页：未调入主存而存在于磁盘的页</p>
+</li>
+<li><p>其他参数</p>
+<table>
+<thead>
+<tr>
+<th>修改位dirty</th>
+<th>对应一致性问题中的回写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用位</td>
+<td>配合替换策略中的LRU</td>
+</tr>
+<tr>
+<td>存取权限位</td>
+<td>可读可写&#x2F;只读&#x2F;只写</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h2 id="2-4-地址转换"><a href="#2-4-地址转换" class="headerlink" title="2.4 地址转换"></a>2.4 地址转换</h2><p>指令执行时，通过CPU的 <code>MMU</code>硬件将虚拟地址转化为物理地址&#x2F;主存地址：</p>
+<ol>
+<li><p>根据<strong>页表基址寄存器</strong>找到<strong>页表首地址</strong>；</p>
+</li>
+<li><p>以虚拟地址高位字段作为<strong>虚拟页号</strong>，$页表首地址+虚拟页号$找到对应的页表项；</p>
+</li>
+<li><p>装入位为1，说明当前页在主存中，取出<strong>物理页号</strong>，和虚拟地址低位字段代表的<strong>页内地址</strong>拼接成实际主存地址；</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2015.png" alt="Untitled"></p>
+</li>
+<li><p>装入位为0，说明缺页，需要把操作系统叫过来，说主存里面找不到，要由操作系统把数据从磁盘调入主存，即调用“<strong>缺页</strong>”异常处理程序</p>
+</li>
+</ol>
+<h2 id="2-5-缺页异常程序"><a href="#2-5-缺页异常程序" class="headerlink" title="2.5 缺页异常程序"></a>2.5 <strong>缺页异常程序</strong></h2><p>▪️根据该表项对应的存放位置字段，从磁盘中把缺失的页面读出，然后找一个空闲物理页框存放该页；<br>▪️如果主存没有空闲页框，需要用相应<strong>替换策略</strong>淘汰一个页，并用<strong>回写法</strong>确定该页是否需要写回到到磁盘上</p>
+<p>▪️最后还需要更新页表</p>
+<h1 id="3-Cache"><a href="#3-Cache" class="headerlink" title="3. Cache"></a>3. Cache</h1><p>CPU要访问主存单元，可以根据cache-主存的映射规则，找到对应的cache进行快速访问</p>
+<p>cache直接制作在CPU内，cache中的每个区域大小相同，主存中的区域大小也相同，但cache的区域和主存的区域不相同。主存中区域叫块 <code>block</code>，cache中区域叫行 <code>line</code>或槽 <code>slot</code>，主存块大小&#x3D;cache行中<strong>数据区</strong>大小</p>
+<hr>
+<p>每个cache行</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2016.png" alt="Untitled"></p>
+<p>▪️有一个<strong>有效位</strong> <code>valid bit</code>，说明该行数据区是否装入主存块，有效位&#x3D;1说明装入了</p>
+<p>▪️除了有<strong>有效位</strong>和<strong>数据区</strong>，还有<strong>标记</strong> <code>tag</code>，因为根据下面不同的映射规则，主存中总会有多个块映射到同一个cache行，所以需要该标记确认是哪一个主存块</p>
+<hr>
+<p>我们假定主存有$2^m$块，cache有$2^c$行：</p>
+<h2 id="3-1-直接映射"><a href="#3-1-直接映射" class="headerlink" title="3.1 直接映射"></a>3.1 直接映射</h2><p>主存的每一块映射到固定的一个 <code>cache</code>行，即</p>
+<p>$cache行号&#x3D;主存块号\ mod\ cache行数$</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2017.png" alt="Untitled"></p>
+<p>主存地址高 <code>t</code>位为标记，中间 <code>c</code>位为行号，剩下的$(m-t-c)$位为块内地址</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2018.png" alt="Untitled"></p>
+<p>1️⃣根据主存地址中间 <code>c</code>位，直接找到对应cache行</p>
+<p>2️⃣将cache行中标记和主存地址高 <code>t</code>位比较，相等 &amp; 有效位&#x3D;1，”cache命中”</p>
+<p>3️⃣如果不相等 | 有效位&#x3D;0，”cache缺失”：CPU从主存中读出该地址所在的主存块，送入对应cache行的数据区，将有效位置1，且标记置为地址高 <code>t</code>位</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2019.png" alt="Untitled"></p>
+<h2 id="3-2-全相联映射"><a href="#3-2-全相联映射" class="headerlink" title="3.2 全相联映射"></a>3.2 全相联映射</h2><p>主存的每一块可以映射到任意的 <code>cache</code>行</p>
+<p>主存地址高 <code>t</code>位为标记，剩下的$(m-t)$位为块内地址</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2020.png" alt="Untitled"></p>
+<p>主存块可能位于任意一个 <code>cache</code>行，所以需要和每个 <code>cache</code>行的 <code>tag</code>进行比较，此时主存地址的标记即为主存块号</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2021.png" alt="Untitled"></p>
+<h2 id="3-3-组相联映射"><a href="#3-3-组相联映射" class="headerlink" title="3.3 组相联映射"></a>3.3 组相联映射</h2><h1 id="3-可执行文件装载"><a href="#3-可执行文件装载" class="headerlink" title="3. 可执行文件装载"></a>3. 可执行文件装载</h1><h2 id="3-1-进程建立"><a href="#3-1-进程建立" class="headerlink" title="3.1 进程建立"></a>3.1 进程建立</h2><p>1️⃣创建虚拟地址空间：并非创建空间，实质为创建映射函数所需要的数据结构，即把虚拟空间的各个页映射到相应的物理空间。</p>
+<p>有时甚至只需要分配一个页目录，页映射关系等发生页错误时再设置。</p>
+<p>2️⃣读取可执行文件头，建立虚拟空间和可执行文件的映射关系：</p>
+<p>系统捕获到页错误，需要知道程序当前所需的页在可执行文件哪个位置，即需要虚拟空间和可执行文件的映射关系。</p>
+<p>如ELF可执行文件只有代码段 <code>.text</code>，虚拟地址为$0x08048000$，大小为$0x000e1$，对齐为$0x1000$（因为32位下页大小为4096字节）。.text段大小不到一个页，考虑到对齐该段占用一个页。</p>
+<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2022.png" alt="Untitled"></p>
+<p>3️⃣CPU指令寄存器设置成可执行文件入口 <code>e_entry</code>，启动运行</p>
+<h2 id="3-2-页错误"><a href="#3-2-页错误" class="headerlink" title="3.2 页错误"></a>3.2 页错误</h2><p>进程创建时，只是通过可执行文件头部信息，建立了【可执行文件 ➡️ 进程虚存】的映射，但可执行文件真正的指令和数据还没有装入物理内存。</p>
+<p>程序入口地址为$0x08048000$，也是 <code>.text</code>的起始地址，CPU开始执行，发现物理内存中$0x08048000-0x08049000$这一页为空，就认为是【<strong>页错误</strong>】。</p>
+<p>操作系统找到空页面的</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>April Sky</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2023/10/30/System/">http://example.com/2023/10/30/System/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%AD%98%E5%82%A8/"># 存储</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2023/10/30/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© April Sky | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
