@@ -13,7 +13,7 @@
 
 
 
-<title>System | Blog</title>
+<title>存储与装载 | Blog</title>
 
 
 
@@ -196,7 +196,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">System</h1>
+            <h1 class="post-title">存储与装载</h1>
             
                 <div class="post-meta">
                     
@@ -205,14 +205,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 30, 2023&nbsp;&nbsp;17:05:17</a>
+                        Date: <a href="#">November 20, 2023&nbsp;&nbsp;10:11:41</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/System/">System</a>
+                                <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
                             
                         </span>
                     
@@ -221,15 +221,17 @@
         </header>
 
         <div class="post-content">
-            <h1 id="存储与装载"><a href="#存储与装载" class="headerlink" title="存储与装载"></a>存储与装载</h1><p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled.png" alt="Untitled"></p>
+            <img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled.png" class="" title="Untitled">
+
 <h1 id="1-缓存机制"><a href="#1-缓存机制" class="headerlink" title="1. 缓存机制"></a>1. 缓存机制</h1><p>无论是OS中的缓存-主存、主存-磁盘，还是Web应用中的Redis-Mysql，都是异曲同工的。</p>
 <h2 id="1-1-替换算法和一致性问题"><a href="#1-1-替换算法和一致性问题" class="headerlink" title="1.1 替换算法和一致性问题"></a>1.1 替换算法和一致性问题</h2><p>当 <code>A</code>和 <code>B</code>之间存在明显的速度差异时，可以考虑在它们中间加一个中间层 <code>C</code>，即<strong>缓存</strong>，如：</p>
 <blockquote>
 <p>▪️CPU和主存间的cache，cache是主存的缓存<br>▪️CPU和磁盘存储器间的主存，主存是磁盘存储器的缓存</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%201.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled1.png" class="" title="Untitled">
 </blockquote>
 <p>我们将 <code>B</code>和 <code>C</code>中按相同大小分为好多块，<code>A</code>想要 <code>B</code>中某个块中数据时可以先访问 <code>C</code>中映射到的块，<code>C</code>中没有这个块再去 <code>B</code>中，把 <code>B</code>中的这个块的数据搬到 <code>C</code>中并访问</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%202.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled2.png" class="" title="Untitled">
+
 <p>那么不可避免的就会带来问题：</p>
 <blockquote>
 <p>1️⃣上层memory容量是远少于下层的，需要进行块<strong>替换</strong><br>2️⃣多级memory相当于有多份数据，如何保证写操作时数据的<strong>一致性</strong></p>
@@ -240,44 +242,50 @@
 <h3 id="1-2-2-最近最少用算法LRU"><a href="#1-2-2-最近最少用算法LRU" class="headerlink" title="1.2.2 最近最少用算法LRU"></a>1.2.2 最近最少用算法LRU</h3><p>▪️思想：选择最近最少使用的主存块淘汰，即最长时间未访问的块</p>
 <p>▪️实现：为每个页面设置一个<strong>访问字段</strong>（计数器），记录页面自上次被访问以来所经历的时间（<strong>时间的本质是每次访问的块，块中计数器置0，其余块计数器+1</strong>），淘汰的时候<strong>淘汰访问字段最大</strong>的块</p>
 <p>▪️缺点：内存中的LRU是由硬件实现，实现困难一点</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%203.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled3.png" class="" title="Untitled">
+
 <h2 id="1-3-一致性"><a href="#1-3-一致性" class="headerlink" title="1.3 一致性"></a>1.3 一致性</h2><p>读操作对一致性没有影响，只要多份数据备份中的数据保持一致，读的结果都一样</p>
 <p>解决一致性问题的关键是<strong>处理写操作</strong></p>
 <h3 id="1-3-1-全写法"><a href="#1-3-1-全写法" class="headerlink" title="1.3.1 全写法"></a>1.3.1 全写法</h3><p>全写法：写操作时，<strong>主存和缓存中数据都要更新</strong></p>
 <ol>
 <li>如果在缓存中<strong>写命中</strong>，同时写缓存和主存；</li>
 </ol>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%204.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled4.png" class="" title="Untitled">
+
 <ol>
 <li><p>如果<strong>写不命中</strong>，分以下两种情况（<strong>区别在于更新主存后是否装入缓存</strong>）</p>
 <p>▪️写分配法：先在主存更新相应存储单元，然后分配一个缓存块，将更新后的主存装入到该缓存</p>
 <p>$\Longrightarrow$这种做法增加了装入时间</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%205.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled5.png" class="" title="Untitled">
+
 <p>▪️非写分配法：仅更新主存相应存储单元，不装入到缓存</p>
 <p>$\Longrightarrow$这种做法减少了装入时间，但没有利用空间局部性</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%206.png" alt="Untitled"></p>
-</li>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled6.png" class="" title="Untitled"></li>
 </ol>
 <p><strong>全写法的非写分配法其实就是Write Through机制</strong></p>
 <h3 id="1-3-2-回写法"><a href="#1-3-2-回写法" class="headerlink" title="1.3.2 回写法"></a>1.3.2 回写法</h3><p>回写法：写操作时，<strong>只在缓存中写，不更新主存</strong></p>
 <ol>
 <li>如果在缓存中写命中，信息只写入缓存不更新主存</li>
 </ol>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%207.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled7.png" class="" title="Untitled">
+
 <ol>
 <li>如果写不命中，分配一个缓存块，将主存块装入到该缓存并在缓存中更新</li>
 </ol>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%208.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled8.png" class="" title="Untitled">
+
 <p><strong>只有在缓存块要被替换掉时，才将该块的内容一次性写入主存</strong></p>
 <blockquote>
 <p>所以回写法需要在缓存行中设置一个<strong>脏位(dirty bit)</strong><br>▪️脏位为1说明该缓存被修改过，替换时需要写回主存<br>▪️脏位为0说明该缓存未被修改，替换时不用写回</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%209.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled9.png" class="" title="Untitled">
 </blockquote>
 <h3 id="1-3-3-Cache-Aside机制"><a href="#1-3-3-Cache-Aside机制" class="headerlink" title="1.3.3 Cache Aside机制"></a>1.3.3 Cache Aside机制</h3><p>在日常使用诸如**<code>Redis</code><strong>中间件用用作数据库缓存时，我们是不可以通过</strong> <code>Redis</code><strong>写数据库的，因此我们日常使用写回法时需要引入额外的中间件</strong>消息队列**(<strong><code>Kafka</code></strong>)，但这会引入额外的复杂性和不稳定因素</p>
 <p>在更新数据的时候，先更新数据库，如果更新成功了，并不去尝试更新缓存，<strong>而是去删除缓存</strong>，缓存不存在就什么都不做</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2010.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled10.png" class="" title="Untitled">
+
 <h1 id="1-为什么要分页式虚拟存储器？"><a href="#1-为什么要分页式虚拟存储器？" class="headerlink" title="1. 为什么要分页式虚拟存储器？"></a>1. 为什么要分页式虚拟存储器？</h1><h2 id="1-1-问题引入——存储器管理内存问题"><a href="#1-1-问题引入——存储器管理内存问题" class="headerlink" title="1.1 问题引入——存储器管理内存问题"></a>1.1 问题引入——存储器管理内存问题</h2><p>直接将物理内存分配给程序使用，计算机有128M内存，程序A运行需要10M，程序B运行需要100M，程序C运行需要20M，同时运行程序A和B，会出现以下3个问题：</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2011.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled11.png" class="" title="Untitled">
+
 <ol>
 <li>程序运行地址不确定：每次将程序装入内存，分配的空闲区域都是不确定的</li>
 <li>地址空间不隔离：A很容易改写B的内存数据</li>
@@ -292,7 +300,8 @@
 <p>但问题3️⃣还没有解决：还是按照程序为单位的内存映射方法，换入换出的是整个程序。根据程序局部性原理，只是频繁地用到一小部分数据，所以可以减小分割粒度。</p>
 <p>$<strong>\Longrightarrow$引入虚拟存储器分页式的实现</strong></p>
 <h1 id="2-分页式虚拟存储器"><a href="#2-分页式虚拟存储器" class="headerlink" title="2. 分页式虚拟存储器"></a>2. 分页式虚拟存储器</h1><h2 id="2-1-虚拟地址空间"><a href="#2-1-虚拟地址空间" class="headerlink" title="2.1 虚拟地址空间"></a>2.1 虚拟地址空间</h2><p>每个进程都拥有自己独立的虚拟地址空间，大小由CPU的位数决定，32位平台虚拟地址空间为4GB；C语言指针大小也由虚拟空间位数决定，32位平台指针为4字节。</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2012.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled12.png" class="" title="Untitled">
+
 <p><strong>主存</strong>和<strong>虚拟地址空间</strong>被划分为大小相同的页面，<strong>磁盘</strong>和<strong>主存</strong>之间按页面为单位交换信息</p>
 <blockquote>
 <p>虚拟页 <code>VP</code>：虚拟空间的页<br>物理页 <code>PP</code>：物理内存的页<br>磁盘页 <code>DP</code>：磁盘中的页</p>
@@ -301,7 +310,8 @@
 <p>程序执行时，把当前需要的程序段和相应的数据块调入主存，其他暂不用的部分存放在磁盘上</p>
 <p>指令执行时，通过硬件将逻辑地址（也称虚拟地址）转化为物理地址（也称主存地址或实地址）</p>
 <p>在主存中的直接执行；如果不在主存里面，会触发缺页，要把操作系统喊过来，说主存里面找不到，由操作系统把数据从磁盘调入主存</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2013.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled13.png" class="" title="Untitled">
+
 <h2 id="2-3-页表"><a href="#2-3-页表" class="headerlink" title="2.3 页表"></a>2.3 页表</h2><hr>
 <p><strong>这一段话很重要</strong></p>
 <p>每一个进程都有自己的页表，反映每一个虚页和物理空间之间的关系：</p>
@@ -310,7 +320,8 @@
 </blockquote>
 <p>页表反映了虚拟地址空间的每一页在磁盘或主存的什么地方，以及这一页是否是空页（如堆和栈中间的空洞），理想的页表会对每一页进行说明。</p>
 <hr>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2014.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled14.png" class="" title="Untitled">
+
 <p>页表存放在进程虚拟地址空间的<strong>内核区</strong>，页表基址寄存器记录了页表在主存的首地址</p>
 <p><strong>页表每一行代表一个虚拟页，行的顺序即为虚拟页号顺序</strong></p>
 <ol>
@@ -348,8 +359,7 @@
 <li><p>以虚拟地址高位字段作为<strong>虚拟页号</strong>，$页表首地址+虚拟页号$找到对应的页表项；</p>
 </li>
 <li><p>装入位为1，说明当前页在主存中，取出<strong>物理页号</strong>，和虚拟地址低位字段代表的<strong>页内地址</strong>拼接成实际主存地址；</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2015.png" alt="Untitled"></p>
-</li>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled15.png" class="" title="Untitled"></li>
 <li><p>装入位为0，说明缺页，需要把操作系统叫过来，说主存里面找不到，要由操作系统把数据从磁盘调入主存，即调用“<strong>缺页</strong>”异常处理程序</p>
 </li>
 </ol>
@@ -359,35 +369,82 @@
 <p>cache直接制作在CPU内，cache中的每个区域大小相同，主存中的区域大小也相同，但cache的区域和主存的区域不相同。主存中区域叫块 <code>block</code>，cache中区域叫行 <code>line</code>或槽 <code>slot</code>，主存块大小&#x3D;cache行中<strong>数据区</strong>大小</p>
 <hr>
 <p>每个cache行</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2016.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled16.png" class="" title="Untitled">
+
 <p>▪️有一个<strong>有效位</strong> <code>valid bit</code>，说明该行数据区是否装入主存块，有效位&#x3D;1说明装入了</p>
 <p>▪️除了有<strong>有效位</strong>和<strong>数据区</strong>，还有<strong>标记</strong> <code>tag</code>，因为根据下面不同的映射规则，主存中总会有多个块映射到同一个cache行，所以需要该标记确认是哪一个主存块</p>
 <hr>
 <p>我们假定主存有$2^m$块，cache有$2^c$行：</p>
 <h2 id="3-1-直接映射"><a href="#3-1-直接映射" class="headerlink" title="3.1 直接映射"></a>3.1 直接映射</h2><p>主存的每一块映射到固定的一个 <code>cache</code>行，即</p>
 <p>$cache行号&#x3D;主存块号\ mod\ cache行数$</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2017.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled17.png" class="" title="Untitled">
+
 <p>主存地址高 <code>t</code>位为标记，中间 <code>c</code>位为行号，剩下的$(m-t-c)$位为块内地址</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2018.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled18.png" class="" title="Untitled">
+
 <p>1️⃣根据主存地址中间 <code>c</code>位，直接找到对应cache行</p>
 <p>2️⃣将cache行中标记和主存地址高 <code>t</code>位比较，相等 &amp; 有效位&#x3D;1，”cache命中”</p>
 <p>3️⃣如果不相等 | 有效位&#x3D;0，”cache缺失”：CPU从主存中读出该地址所在的主存块，送入对应cache行的数据区，将有效位置1，且标记置为地址高 <code>t</code>位</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2019.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled19.png" class="" title="Untitled">
+
 <h2 id="3-2-全相联映射"><a href="#3-2-全相联映射" class="headerlink" title="3.2 全相联映射"></a>3.2 全相联映射</h2><p>主存的每一块可以映射到任意的 <code>cache</code>行</p>
 <p>主存地址高 <code>t</code>位为标记，剩下的$(m-t)$位为块内地址</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2020.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled20.png" class="" title="Untitled">
+
 <p>主存块可能位于任意一个 <code>cache</code>行，所以需要和每个 <code>cache</code>行的 <code>tag</code>进行比较，此时主存地址的标记即为主存块号</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2021.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled21.png" class="" title="Untitled">
+
 <h2 id="3-3-组相联映射"><a href="#3-3-组相联映射" class="headerlink" title="3.3 组相联映射"></a>3.3 组相联映射</h2><h1 id="3-可执行文件装载"><a href="#3-可执行文件装载" class="headerlink" title="3. 可执行文件装载"></a>3. 可执行文件装载</h1><h2 id="3-1-进程建立"><a href="#3-1-进程建立" class="headerlink" title="3.1 进程建立"></a>3.1 进程建立</h2><p>1️⃣创建虚拟地址空间：并非创建空间，实质为创建映射函数所需要的数据结构，即把虚拟空间的各个页映射到相应的物理空间。</p>
 <p>有时甚至只需要分配一个页目录，页映射关系等发生页错误时再设置。</p>
 <p>2️⃣读取可执行文件头，建立虚拟空间和可执行文件的映射关系：</p>
 <p>系统捕获到页错误，需要知道程序当前所需的页在可执行文件哪个位置，即需要虚拟空间和可执行文件的映射关系。</p>
 <p>如ELF可执行文件只有代码段 <code>.text</code>，虚拟地址为$0x08048000$，大小为$0x000e1$，对齐为$0x1000$（因为32位下页大小为4096字节）。.text段大小不到一个页，考虑到对齐该段占用一个页。</p>
-<p><img src="/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD%209d03097b4a64437d895ff7f4671136d9/Untitled%2022.png" alt="Untitled"></p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled22.png" class="" title="Untitled">
+
 <p>3️⃣CPU指令寄存器设置成可执行文件入口 <code>e_entry</code>，启动运行</p>
 <h2 id="3-2-页错误"><a href="#3-2-页错误" class="headerlink" title="3.2 页错误"></a>3.2 页错误</h2><p>进程创建时，只是通过可执行文件头部信息，建立了【可执行文件 ➡️ 进程虚存】的映射，但可执行文件真正的指令和数据还没有装入物理内存。</p>
 <p>程序入口地址为$0x08048000$，也是 <code>.text</code>的起始地址，CPU开始执行，发现物理内存中$0x08048000-0x08049000$这一页为空，就认为是【<strong>页错误</strong>】。</p>
 <p>操作系统找到空页面的</p>
+<h1 id="5-进程地址空间"><a href="#5-进程地址空间" class="headerlink" title="5. 进程地址空间"></a>5. 进程地址空间</h1><p>装载完成后，程序变为进程，我们可以通过以下两种方式查看进程的地址空间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pmap 进程号</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/进程号/maps</span><br></pre></td></tr></table></figure>
+
+<p>其中进程号可以由 <code>gdb</code>中 <code>info inferiors</code>查看得到</p>
+<aside>
+💡 `pmap`命令本质也是打开了`/proc/pid/maps`这个文件，然后对该文件中内容做了简化
+
+</aside>
+
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled23.png" class="" title="Untitled">
+
+<p>需要注意如下几点</p>
+<ol>
+<li><p>C标准库 <code>libc.so.6</code>在 <code>gdb</code>运行 <code>starti</code>命令进入 <code>_start</code>时没有出现，因为此时动态链接器 <code>ld-linux-x86-64.so.2</code>没有把运行库装入内存，只有运行 <code>start</code>命令进入 <code>main</code>时 <code>libc</code>才出现</p>
+<img src="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/Untitled24.png" class="" title="Untitled"></li>
+<li><p>ELF文件可装载的几个segment可以通过权限区分：如 <code>r-xp</code>有可执行权限，所以为 <code>.text</code>；<code>rw-p</code>有可写权限，所以为 <code>.data</code></p>
+</li>
+<li><p><code>vdso</code>与 <code>vsyscall</code></p>
+</li>
+</ol>
+<h2 id="5-1-vDSO和vsyscall"><a href="#5-1-vDSO和vsyscall" class="headerlink" title="5.1 vDSO和vsyscall"></a>5.1 vDSO和vsyscall</h2><p>在Linux内核中，调用系统调用是一项昂贵的操作，处理器必须中断当前正在执行的任务，将上下文切换到内核模式，然后在系统调用处理程序完成工作后再次跳转到用户空间</p>
+<ol>
+<li><p>虚拟系统调用 <code>vsyscall</code></p>
+<p><code>vsyscall</code>的工作原理很简单：内核将一个页面映射到用户空间，该页面包含一些变量和一些系统调用的实现，这些系统调用将在用户空间执行，意味着不会出现上下文切换</p>
+<p>vsyscall有两个特点：</p>
+<blockquote>
+<p>1️⃣虚拟系统调用的地址是固定的，即 <code>vsyscall</code>页面每次都位于相同的位置，地址为 <code>ffffffffff600000</code></p>
+<p>2️⃣vsyscall实现了三个系统调用：<code>gettimeofday</code>，<code>time</code>，<code>getcpu</code></p>
+</blockquote>
+</li>
+<li><p>虚拟动态共享对象 <code>vDSO</code></p>
+<p>鉴于 <code>vsyscall</code>的特点1，它已经是一个过时的概念，取而代之的是 <code>vDSO</code>或虚拟动态共享对象</p>
+<p><code>vDSO</code>相比于 <code>vsyscall</code>也有两个特点：</p>
+<blockquote>
+<p>1️⃣以共享对象的形式将内存页映射到每个进程中，地址是动态加载的<br>2️⃣<code>vDSO</code>中实现了四个系统调用：<code>__vdso_clock_gettime</code>，<code>__vdso_gettimeofday</code>，<code>__vdso_time</code>，<code>__vdso_getcpu</code></p>
+</blockquote>
+</li>
+</ol>
 
         </div>
 
@@ -402,7 +459,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2023/10/30/System/">http://example.com/2023/10/30/System/</a></span>
+                        <span><a href="http://example.com/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/">http://example.com/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/</a></span>
                     </p>
                 
                 
@@ -426,7 +483,11 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/%E5%AD%98%E5%82%A8/"># 存储</a>
+                        <a href="/tags/%E7%BC%93%E5%AD%98/"># 缓存</a>
+                    
+                        <a href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/"># 虚拟地址</a>
+                    
+                        <a href="/tags/%E8%A3%85%E8%BD%BD/"># 装载</a>
                     
                         
                 </span>
@@ -438,6 +499,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/11/20/Vim/">Vim</a>
             
             
             <a class="next" rel="next" href="/2023/10/30/hello-world/">Hello World</a>

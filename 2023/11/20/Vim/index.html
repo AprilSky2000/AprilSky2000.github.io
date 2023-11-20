@@ -13,7 +13,7 @@
 
 
 
-<title>Hello World | Blog</title>
+<title>Vim | Blog</title>
 
 
 
@@ -196,7 +196,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">Vim</h1>
             
                 <div class="post-meta">
                     
@@ -205,28 +205,164 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 30, 2023&nbsp;&nbsp;15:47:40</a>
+                        Date: <a href="#">November 20, 2023&nbsp;&nbsp;10:25:45</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Tool/">Tool</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <h1 id="1-vim的三种模式"><a href="#1-vim的三种模式" class="headerlink" title="1. vim的三种模式"></a>1. vim的三种模式</h1><ul>
+<li>一般命令模式：vi打开一个文件直接进入该模式，可进行复制、粘贴、删除</li>
+<li>编辑模式：可以编辑文件内容</li>
+<li>命令行模式：输入 <code>:</code>、<code>/</code>、<code>?</code>三个中任意一个，可将光标移到最下面一行</li>
+</ul>
+ <img src="/2023/11/20/Vim/Untitled.png" class="" title="Untitled">
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h1 id="2-一般命令模式按键"><a href="#2-一般命令模式按键" class="headerlink" title="2. 一般命令模式按键"></a>2. 一般命令模式按键</h1><h2 id="2-1-移动光标"><a href="#2-1-移动光标" class="headerlink" title="2.1 移动光标"></a>2.1 移动光标</h2><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>移动到这一行最前面字符</td>
+</tr>
+<tr>
+<td>$</td>
+<td>移动到这一行最后面字符</td>
+</tr>
+<tr>
+<td>G</td>
+<td>移动到文件最后一行</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>移动到文件第一行</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-查找"><a href="#2-2-查找" class="headerlink" title="2.2 查找"></a>2.2 查找</h2><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;word</td>
+<td>光标之下查找名为word的字符串</td>
+</tr>
+<tr>
+<td>?word</td>
+<td>光标之上查找名为word的字符串</td>
+</tr>
+<tr>
+<td>n</td>
+<td>重复前一次查找</td>
+</tr>
+<tr>
+<td>N</td>
+<td>对n进行反向操作</td>
+</tr>
+</tbody></table>
+<h2 id="2-3-替换"><a href="#2-3-替换" class="headerlink" title="2.3 替换"></a>2.3 替换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:n1,n2s/word1/word2/g       <span class="comment"># 将n1~n2行中的word1替换为word2</span></span><br><span class="line">:1,<span class="variable">$s</span>/word1/word2/g         <span class="comment"># 如果为&quot;1,$&quot;代表第一行到最后一行全部替换</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="2-4-删除、复制、粘贴"><a href="#2-4-删除、复制、粘贴" class="headerlink" title="2.4 删除、复制、粘贴"></a>2.4 删除、复制、粘贴</h2><table>
+<thead>
+<tr>
+<th>删除</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x或X</td>
+<td>删除一个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除整行</td>
+</tr>
+<tr>
+<td>ndd</td>
+<td>n为数字，删除光标向下n行</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>复制&#x2F;粘贴</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yy</td>
+<td>复制光标所在那一行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td>n为数字，复制光标向下n行</td>
+</tr>
+<tr>
+<td>p或P</td>
+<td>p将已复制内容在光标下一行粘贴，P在光标上一行粘贴</td>
+</tr>
+<tr>
+<td>u</td>
+<td>撤销上一次操作</td>
+</tr>
+</tbody></table>
+<h1 id="3-编辑模式"><a href="#3-编辑模式" class="headerlink" title="3. 编辑模式"></a>3. 编辑模式</h1><p><code>i/a/o</code>均为进入插入模式，<code>[Esc]</code>为退出插入模式</p>
+<h1 id="4-命令行模式"><a href="#4-命令行模式" class="headerlink" title="4. 命令行模式"></a>4. 命令行模式</h1><table>
+<thead>
+<tr>
+<th>命令</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:w</td>
+<td>编辑数据写入文件</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出vi</td>
+</tr>
+<tr>
+<td>:! command</td>
+<td>暂时退出vi，到命令行模式执行command的显示结果</td>
+</tr>
+<tr>
+<td>:set nu</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>:set nonu</td>
+<td>取消行号</td>
+</tr>
+<tr>
+<td>:set nowrap</td>
+<td>将文本碰到右边自动换行取消，只有文本中有换行符时才换行</td>
+</tr>
+</tbody></table>
+<p>如果加上 <code>!</code>，代表<strong>强制写入</strong>或<strong>强制退出</strong></p>
+<h1 id="5-可视模式"><a href="#5-可视模式" class="headerlink" title="5. 可视模式"></a>5. 可视模式</h1><p>可以高亮选中一部分文本</p>
+<ul>
+<li><code>v</code>命令进入字符可视模式，文本选择是以字符为单位的</li>
+<li><code>V</code>命令进入行可视模式，文本选择是以行为单位的</li>
+<li><code>[Ctrl+V]</code>&#x2F;<code>[Ctrl+Q]</code>进入块可视化模式</li>
+</ul>
+<h1 id="6-vim环境"><a href="#6-vim环境" class="headerlink" title="6. vim环境"></a>6. vim环境</h1><p>整体vim设置一般放在 <code>/etc/vimrc</code>文件中，这个文件建议不动，在 <code>~/.vimrc</code>（默认不存在）这个文件中修改设置</p>
 
         </div>
 
@@ -241,7 +377,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2023/10/30/hello-world/">http://example.com/2023/10/30/hello-world/</a></span>
+                        <span><a href="http://example.com/2023/11/20/Vim/">http://example.com/2023/11/20/Vim/</a></span>
                     </p>
                 
                 
@@ -274,8 +410,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/">存储与装载</a>
             
+            <a class="next" rel="next" href="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/">存储与装载</a>
             
         </section>
 
