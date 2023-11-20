@@ -460,7 +460,7 @@
         repo: 'AprilSky2000.github.io',
         owner: 'AprilSky2000',
         admin: 'AprilSky2000',
-        id: location.pathname,
+        id: decodeURI(window.location.pathname),
         labels: 'Gitalk'.split(',').filter(l => l),
         perPage: 10,
         pagerDirection: 'last',
