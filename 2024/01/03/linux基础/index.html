@@ -13,7 +13,7 @@
 
 
 
-<title>Vim | Blog</title>
+<title>linux基础 | Blog</title>
 
 
 
@@ -196,7 +196,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Vim</h1>
+            <h1 class="post-title">linux基础</h1>
             
                 <div class="post-meta">
                     
@@ -205,14 +205,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">November 20, 2023&nbsp;&nbsp;10:25:45</a>
+                        Date: <a href="#">January 3, 2024&nbsp;&nbsp;22:30:21</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Tool/">Tool</a>
+                                <a href="/categories/Linux/">Linux</a>
                             
                         </span>
                     
@@ -221,148 +221,85 @@
         </header>
 
         <div class="post-content">
-            <h1 id="1-vim的三种模式"><a href="#1-vim的三种模式" class="headerlink" title="1. vim的三种模式"></a>1. vim的三种模式</h1><ul>
-<li>一般命令模式：vi打开一个文件直接进入该模式，可进行复制、粘贴、删除</li>
-<li>编辑模式：可以编辑文件内容</li>
-<li>命令行模式：输入 <code>:</code>、<code>/</code>、<code>?</code>三个中任意一个，可将光标移到最下面一行</li>
+            <h1 id="1-linux基础"><a href="#1-linux基础" class="headerlink" title="1. linux基础"></a>1. linux基础</h1><h2 id="1-1-命令行模式"><a href="#1-1-命令行模式" class="headerlink" title="1.1 命令行模式"></a><strong>1.1 命令行模式</strong></h2><ol>
+<li><p><strong>登录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主机名 login: 输入账号</span><br><span class="line">Password: 输入该账号对应密码</span><br></pre></td></tr></table></figure>
+
+<p>成功后进入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[目前的用户账号@主机名 目前所在的目录]$</span><br></pre></td></tr></table></figure>
+
+<p>注意：一般身份用户的提示字符如上，为$；root的提示字符为#</p>
+<p><strong>注销Linux</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[user@centos 桌面]$ <span class="built_in">exit</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>模式切换</strong><br>Linux默认提供六个终端给用户登录，分别为 <code>tty1 - tty6</code>的操作接口环境</p>
+<ul>
+<li><code>Ctrl + Alt + F2 ~ F6</code>：命令行模式登录 <code>tty2 - tty6</code>终端</li>
+<li><code>Ctrl + Alt + F1</code>：图形用户界面模式</li>
 </ul>
- <img src="/2023/11/20/Vim/Untitled.png" class="" title="Untitled">
-
-<h1 id="2-一般命令模式按键"><a href="#2-一般命令模式按键" class="headerlink" title="2. 一般命令模式按键"></a>2. 一般命令模式按键</h1><h2 id="2-1-移动光标"><a href="#2-1-移动光标" class="headerlink" title="2.1 移动光标"></a>2.1 移动光标</h2><table>
-<thead>
-<tr>
-<th>按键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td>移动到这一行最前面字符</td>
-</tr>
-<tr>
-<td>$</td>
-<td>移动到这一行最后面字符</td>
-</tr>
-<tr>
-<td>G</td>
-<td>移动到文件最后一行</td>
-</tr>
-<tr>
-<td>gg</td>
-<td>移动到文件第一行</td>
-</tr>
-</tbody></table>
-<h2 id="2-2-查找"><a href="#2-2-查找" class="headerlink" title="2.2 查找"></a>2.2 查找</h2><table>
-<thead>
-<tr>
-<th>按键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;word</td>
-<td>光标之下查找名为word的字符串</td>
-</tr>
-<tr>
-<td>?word</td>
-<td>光标之上查找名为word的字符串</td>
-</tr>
-<tr>
-<td>n</td>
-<td>重复前一次查找</td>
-</tr>
-<tr>
-<td>N</td>
-<td>对n进行反向操作</td>
-</tr>
-</tbody></table>
-<h2 id="2-3-替换"><a href="#2-3-替换" class="headerlink" title="2.3 替换"></a>2.3 替换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:n1,n2s/word1/word2/g       <span class="comment"># 将n1~n2行中的word1替换为word2</span></span><br><span class="line">:1,<span class="variable">$s</span>/word1/word2/g         <span class="comment"># 如果为&quot;1,$&quot;代表第一行到最后一行全部替换</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-4-删除、复制、粘贴"><a href="#2-4-删除、复制、粘贴" class="headerlink" title="2.4 删除、复制、粘贴"></a>2.4 删除、复制、粘贴</h2><table>
-<thead>
-<tr>
-<th>删除</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>x或X</td>
-<td>删除一个字符</td>
-</tr>
-<tr>
-<td>dd</td>
-<td>删除整行</td>
-</tr>
-<tr>
-<td>ndd</td>
-<td>n为数字，删除光标向下n行</td>
-</tr>
-</tbody></table>
+</li>
+<li><p><strong>热键</strong></p>
 <table>
 <thead>
 <tr>
-<th>复制&#x2F;粘贴</th>
-<th></th>
+<th>按键</th>
+<th>执行结果</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>yy</td>
-<td>复制光标所在那一行</td>
+<td>[Tab]</td>
+<td>命令或文件名的补全</td>
 </tr>
 <tr>
-<td>nyy</td>
-<td>n为数字，复制光标向下n行</td>
+<td>[Ctrl]+c</td>
+<td>终止当前命令</td>
 </tr>
 <tr>
-<td>p或P</td>
-<td>p将已复制内容在光标下一行粘贴，P在光标上一行粘贴</td>
+<td>[Ctrl]+d</td>
+<td>输入结束(EOF)</td>
 </tr>
 <tr>
-<td>u</td>
-<td>撤销上一次操作</td>
+<td>[Ctrl]+m</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>[Ctrl]+s</td>
+<td>暂停屏幕输出</td>
+</tr>
+<tr>
+<td>[Ctrl]+q</td>
+<td>恢复屏幕输出</td>
+</tr>
+<tr>
+<td>[Ctrl]+u</td>
+<td>在提示字符下，将整列命令删除</td>
+</tr>
+<tr>
+<td>[Ctrl]+z</td>
+<td>暂停当前命令</td>
 </tr>
 </tbody></table>
-<h1 id="3-编辑模式"><a href="#3-编辑模式" class="headerlink" title="3. 编辑模式"></a>3. 编辑模式</h1><p><code>i/a/o</code>均为进入插入模式，<code>[Esc]</code>为退出插入模式</p>
-<h1 id="4-命令行模式"><a href="#4-命令行模式" class="headerlink" title="4. 命令行模式"></a>4. 命令行模式</h1><table>
-<thead>
-<tr>
-<th>命令</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>:w</td>
-<td>编辑数据写入文件</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出vi</td>
-</tr>
-<tr>
-<td>:! command</td>
-<td>暂时退出vi，到命令行模式执行command的显示结果</td>
-</tr>
-<tr>
-<td>:set nu</td>
-<td>显示行号</td>
-</tr>
-<tr>
-<td>:set nonu</td>
-<td>取消行号</td>
-</tr>
-<tr>
-<td>:set nowrap</td>
-<td>将文本碰到右边自动换行取消，只有文本中有换行符时才换行</td>
-</tr>
-</tbody></table>
-<p>如果加上 <code>!</code>，代表<strong>强制写入</strong>或<strong>强制退出</strong></p>
-<h1 id="5-可视模式"><a href="#5-可视模式" class="headerlink" title="5. 可视模式"></a>5. 可视模式</h1><p>可以高亮选中一部分文本</p>
-<ul>
-<li><code>v</code>命令进入字符可视模式，文本选择是以字符为单位的</li>
-<li><code>V</code>命令进入行可视模式，文本选择是以行为单位的</li>
-<li><code>[Ctrl+V]</code>&#x2F;<code>[Ctrl+Q]</code>进入块可视化模式</li>
+</li>
+</ol>
+<h2 id="1-2-绝对路径与相对路径"><a href="#1-2-绝对路径与相对路径" class="headerlink" title="1.2 绝对路径与相对路径"></a><strong>1.2 绝对路径与相对路径</strong></h2><ul>
+<li>绝对路径：有根目录（&#x2F;）开始写起</li>
+<li>相对路径，开头不是&#x2F;就属于相对路径写法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.或者./: 代表当前目录</span><br><span class="line">..或者../: 代表上一层目录</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h1 id="6-vim环境"><a href="#6-vim环境" class="headerlink" title="6. vim环境"></a>6. vim环境</h1><p>整体vim设置一般放在 <code>/etc/vimrc</code>文件中，这个文件建议不动，在 <code>~/.vimrc</code>（默认不存在）这个文件中修改设置</p>
+<h2 id="1-3-命令的查找顺序"><a href="#1-3-命令的查找顺序" class="headerlink" title="1.3 命令的查找顺序"></a><strong>1.3 命令的查找顺序</strong></h2><ol>
+<li>以相对&#x2F;绝对路径执行命令，如【&#x2F;bin&#x2F;ls】或【.&#x2F;ls】</li>
+<li>由【alias】找到该命令来执行</li>
+<li>由bash内置的（<code>builtin</code>）命令来执行</li>
+<li>通过 <code>$PATH</code>变量内的顺序查找到第一个命令执行</li>
+</ol>
+<h2 id="1-4-ANSI转义序列"><a href="#1-4-ANSI转义序列" class="headerlink" title="1.4 ANSI转义序列"></a>1.4 ANSI转义序列</h2><p>在命令行中对字符属性进行改变需要依靠转义序列</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\<span class="number">033</span>[文本属性;颜色属性m  数据内容  \\<span class="number">033</span>[<span class="number">0</span>m</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>\\033</code>：转移序列是以 <code>ESC</code>开头的，<code>ESC</code>在ASCII码中即为$(27)_{10}$或$(33)_8$，在shell中表示为 <code>^[</code></li>
+<li><code>[</code>：说明接下来开始定义文本属性和颜色属性</li>
+<li>文本属性定义如下：| 字体代码 | 字体说明 |<br>| ——– | ——– |<br>| 0        | 默认值   |<br>| 1        | 粗体     |<br>| 22       | 非粗体   |<br>| 4        | 下划线   |<br>| 24       | 非下划线 |<br>| 5        | 闪烁     |<br>| 25       | 非闪烁   |<br>| 7        | 背景色   |<br>| 27       | 非背景色 |</li>
+<li>颜色属性定义如下：分为前景色和背景色，前景色第1个数为3，背景色第1个数为4| 前景色&#x2F;背景色代码 | 颜色说明 |<br>| —————– | ——– |<br>| 30&#x2F;40             | 黑色     |<br>| 31&#x2F;41             | 红色     |<br>| 32&#x2F;42             | 绿色     |<br>| 33&#x2F;43             | 黄色     |<br>| 34&#x2F;44             | 蓝色     |<br>| 35&#x2F;45             | 洋红     |<br>| 36&#x2F;46             | 青色     |<br>| 37&#x2F;47             | 白色     |</li>
+<li>关闭转义序列：<code>\\033[0m</code>，也是shell的默认色</li>
+</ol>
 
         </div>
 
@@ -375,6 +312,8 @@
                     
                         <a href="/tags/%E5%B7%A5%E5%85%B7/"># 工具</a>
                     
+                        <a href="/tags/linux/"># linux</a>
+                    
                         
                 </span>
             </div>
@@ -386,10 +325,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2024/01/03/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+                <a class="prev" rel="prev" href="/2024/01/03/linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%9A%E9%85%8D%E7%AC%A6-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">linux命令行通配符&正则表达式</a>
             
             
-            <a class="next" rel="next" href="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/">存储与装载</a>
+            <a class="next" rel="next" href="/2023/11/20/Vim/">Vim</a>
             
         </section>
 

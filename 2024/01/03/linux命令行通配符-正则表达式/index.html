@@ -13,7 +13,7 @@
 
 
 
-<title>Vim | Blog</title>
+<title>linux命令行通配符&amp;正则表达式 | Blog</title>
 
 
 
@@ -196,7 +196,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Vim</h1>
+            <h1 class="post-title">linux命令行通配符&amp;正则表达式</h1>
             
                 <div class="post-meta">
                     
@@ -205,14 +205,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">November 20, 2023&nbsp;&nbsp;10:25:45</a>
+                        Date: <a href="#">January 3, 2024&nbsp;&nbsp;22:43:32</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Tool/">Tool</a>
+                                <a href="/categories/linux/">linux</a>
                             
                         </span>
                     
@@ -221,148 +221,118 @@
         </header>
 
         <div class="post-content">
-            <h1 id="1-vim的三种模式"><a href="#1-vim的三种模式" class="headerlink" title="1. vim的三种模式"></a>1. vim的三种模式</h1><ul>
-<li>一般命令模式：vi打开一个文件直接进入该模式，可进行复制、粘贴、删除</li>
-<li>编辑模式：可以编辑文件内容</li>
-<li>命令行模式：输入 <code>:</code>、<code>/</code>、<code>?</code>三个中任意一个，可将光标移到最下面一行</li>
-</ul>
- <img src="/2023/11/20/Vim/Untitled.png" class="" title="Untitled">
+            <h1 id="2-通配符与正则表达式"><a href="#2-通配符与正则表达式" class="headerlink" title="2. 通配符与正则表达式"></a>2. 通配符与正则表达式</h1><h2 id="2-1-命令行通配符"><a href="#2-1-命令行通配符" class="headerlink" title="2.1 命令行通配符"></a><strong>2.1 命令行通配符</strong></h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>代表【0个到无穷多个】任意字符</td>
+</tr>
+<tr>
+<td>?</td>
+<td>代表【一定有一个】任意字符</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>代表【一定有一个在括号内】的字符，如[abc]代表一定有一个字符，可能是a、b、c中任一个</td>
+</tr>
+<tr>
+<td>[ - ]</td>
+<td>代表【在编码顺序内的所有字符】，如[0-9]</td>
+</tr>
+<tr>
+<td>[^ ]</td>
+<td>代表【反向选择】，如[^abc]有一个字符，只要非a、b、c的其他字符就能接受</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-正则表达式字符集"><a href="#2-2-正则表达式字符集" class="headerlink" title="2.2 正则表达式字符集"></a><strong>2.2 正则表达式字符集</strong></h2><table>
+<thead>
+<tr>
+<th>RE字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^word</td>
+<td>待查找的字符串word在行首</td>
+</tr>
+<tr>
+<td>word$</td>
+<td>待查找的字符串word在行尾</td>
+</tr>
+<tr>
+<td>.</td>
+<td>代表【一定有一个任意字符】的字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>重复【零个到无穷多个】前一个RE字符 <code>&lt;br&gt;</code>与扩展中的+关联</td>
+</tr>
+<tr>
+<td>\</td>
+<td>将特殊符号的特殊意义去掉</td>
+</tr>
+<tr>
+<td>[list]</td>
+<td>里面列出想要选取的字符，但【只代表一个待查找的字符】</td>
+</tr>
+<tr>
+<td>[n1-n2]</td>
+<td>两个字符之间的所有连续字符，是否连续与ASCII有关</td>
+</tr>
+<tr>
+<td>[^list]</td>
+<td>里面列出不要的字符串或范围</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>连续n到m个的前一个RE字符 <code>&lt;br&gt;</code>go{2,3}g&lt;&#x3D;&gt;goog或gooog</td>
+</tr>
+</tbody></table>
+<p><strong>2.1输入命令通配符和2.2的正则表达式特殊字符并不相同</strong></p>
+<h2 id="2-3-扩展正则表达式"><a href="#2-3-扩展正则表达式" class="headerlink" title="2.3 扩展正则表达式"></a><strong>2.3 扩展正则表达式</strong></h2><table>
+<thead>
+<tr>
+<th>RE字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>重复【一个到无穷多个】前一个RE字符 <code>&lt;br&gt;</code>和基础中的*关联</td>
+</tr>
+<tr>
+<td>?</td>
+<td>重复【零个或一个】前一个RE字符</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>正则表达式子表达式 <code>&lt;br&gt;</code>g(la|oo)d</td>
+</tr>
+<tr>
+<td>( )+</td>
+<td>重复多次第四行的查找 <code>&lt;br&gt;</code>A(xyz)+C&lt;&#x3D;&gt;开头是A结尾是C，中间有一个以上的”xyz”字符串 <code>&lt;br&gt;</code>作用和基础中的{n,m}类似</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-1-子表达式与反向引用"><a href="#2-3-1-子表达式与反向引用" class="headerlink" title="2.3.1 子表达式与反向引用"></a>2.3.1 子表达式与反向引用</h3><p>正则表达式子表达式可以恰当地控制 <strong>重复的匹配模式</strong> ，可配合 <code>&#123;n, m&#125;</code>和 <code>+</code>使用，也可配合<strong>反向引用</strong>使用</p>
+<p>子表达式即上面提到的，用 <code>( )</code>括起来的部分</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(ab)+      <span class="comment">// 重复多次ab</span></span><br><span class="line">(ab)&#123;<span class="number">2</span>&#125;    <span class="comment">// 重复2次ab</span></span><br><span class="line">(ab)&#123;<span class="number">2</span>,<span class="number">3</span>&#125;  <span class="comment">// 重复2~3次ab</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="2-一般命令模式按键"><a href="#2-一般命令模式按键" class="headerlink" title="2. 一般命令模式按键"></a>2. 一般命令模式按键</h1><h2 id="2-1-移动光标"><a href="#2-1-移动光标" class="headerlink" title="2.1 移动光标"></a>2.1 移动光标</h2><table>
-<thead>
-<tr>
-<th>按键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td>移动到这一行最前面字符</td>
-</tr>
-<tr>
-<td>$</td>
-<td>移动到这一行最后面字符</td>
-</tr>
-<tr>
-<td>G</td>
-<td>移动到文件最后一行</td>
-</tr>
-<tr>
-<td>gg</td>
-<td>移动到文件第一行</td>
-</tr>
-</tbody></table>
-<h2 id="2-2-查找"><a href="#2-2-查找" class="headerlink" title="2.2 查找"></a>2.2 查找</h2><table>
-<thead>
-<tr>
-<th>按键</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;word</td>
-<td>光标之下查找名为word的字符串</td>
-</tr>
-<tr>
-<td>?word</td>
-<td>光标之上查找名为word的字符串</td>
-</tr>
-<tr>
-<td>n</td>
-<td>重复前一次查找</td>
-</tr>
-<tr>
-<td>N</td>
-<td>对n进行反向操作</td>
-</tr>
-</tbody></table>
-<h2 id="2-3-替换"><a href="#2-3-替换" class="headerlink" title="2.3 替换"></a>2.3 替换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:n1,n2s/word1/word2/g       <span class="comment"># 将n1~n2行中的word1替换为word2</span></span><br><span class="line">:1,<span class="variable">$s</span>/word1/word2/g         <span class="comment"># 如果为&quot;1,$&quot;代表第一行到最后一行全部替换</span></span><br></pre></td></tr></table></figure>
+<p>反向引用为 <code>\\1,</code> <code>\\2</code>, <code>\\3</code>…</p>
+<p>反向引用基本原理：捕获组匹配成功时，会将<strong>子表达式</strong>匹配到的内容，保存到内存中一个以数字编号的组里，可以简单的认为是对一个局部变量进行了赋值，这时就可以通过反向引用方式，引用这个局部变量的值。捕获组在匹配成功之前，它的内容可以是不确定的，一旦匹配成功，它的内容就确定了，反向引用的内容也就是确定的了。</p>
+<p>举例来说，如果需要匹配HTML中的标题标签 <code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code>，通常写成以下形式，但如果此时为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;[hH][<span class="number">1</span><span class="number">-6</span>]&gt;.*?&lt;\\/[hH][<span class="number">1</span><span class="number">-6</span>]&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-4-删除、复制、粘贴"><a href="#2-4-删除、复制、粘贴" class="headerlink" title="2.4 删除、复制、粘贴"></a>2.4 删除、复制、粘贴</h2><table>
-<thead>
-<tr>
-<th>删除</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>x或X</td>
-<td>删除一个字符</td>
-</tr>
-<tr>
-<td>dd</td>
-<td>删除整行</td>
-</tr>
-<tr>
-<td>ndd</td>
-<td>n为数字，删除光标向下n行</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>复制&#x2F;粘贴</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>yy</td>
-<td>复制光标所在那一行</td>
-</tr>
-<tr>
-<td>nyy</td>
-<td>n为数字，复制光标向下n行</td>
-</tr>
-<tr>
-<td>p或P</td>
-<td>p将已复制内容在光标下一行粘贴，P在光标上一行粘贴</td>
-</tr>
-<tr>
-<td>u</td>
-<td>撤销上一次操作</td>
-</tr>
-</tbody></table>
-<h1 id="3-编辑模式"><a href="#3-编辑模式" class="headerlink" title="3. 编辑模式"></a>3. 编辑模式</h1><p><code>i/a/o</code>均为进入插入模式，<code>[Esc]</code>为退出插入模式</p>
-<h1 id="4-命令行模式"><a href="#4-命令行模式" class="headerlink" title="4. 命令行模式"></a>4. 命令行模式</h1><table>
-<thead>
-<tr>
-<th>命令</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>:w</td>
-<td>编辑数据写入文件</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出vi</td>
-</tr>
-<tr>
-<td>:! command</td>
-<td>暂时退出vi，到命令行模式执行command的显示结果</td>
-</tr>
-<tr>
-<td>:set nu</td>
-<td>显示行号</td>
-</tr>
-<tr>
-<td>:set nonu</td>
-<td>取消行号</td>
-</tr>
-<tr>
-<td>:set nowrap</td>
-<td>将文本碰到右边自动换行取消，只有文本中有换行符时才换行</td>
-</tr>
-</tbody></table>
-<p>如果加上 <code>!</code>，代表<strong>强制写入</strong>或<strong>强制退出</strong></p>
-<h1 id="5-可视模式"><a href="#5-可视模式" class="headerlink" title="5. 可视模式"></a>5. 可视模式</h1><p>可以高亮选中一部分文本</p>
-<ul>
-<li><code>v</code>命令进入字符可视模式，文本选择是以字符为单位的</li>
-<li><code>V</code>命令进入行可视模式，文本选择是以行为单位的</li>
-<li><code>[Ctrl+V]</code>&#x2F;<code>[Ctrl+Q]</code>进入块可视化模式</li>
-</ul>
-<h1 id="6-vim环境"><a href="#6-vim环境" class="headerlink" title="6. vim环境"></a>6. vim环境</h1><p>整体vim设置一般放在 <code>/etc/vimrc</code>文件中，这个文件建议不动，在 <code>~/.vimrc</code>（默认不存在）这个文件中修改设置</p>
+
+
+<p><code>&lt;h2&gt;&lt;/h3&gt;</code>是不能匹配的，此时上面的表达式就没用了，但如果用反向引用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;([hH][<span class="number">1</span><span class="number">-6</span>])&gt;.*?&lt;\\/\\<span class="number">1</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>\\1</code>即为反向引用，它匹配模式中所使用的第一个子表达式，<code>\\2</code>匹配第二个子表达式，<code>\\3</code>匹配第三个，以此类推。</p>
 
         </div>
 
@@ -375,6 +345,8 @@
                     
                         <a href="/tags/%E5%B7%A5%E5%85%B7/"># 工具</a>
                     
+                        <a href="/tags/Linux/"># Linux</a>
+                    
                         
                 </span>
             </div>
@@ -386,10 +358,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2024/01/03/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+                <a class="prev" rel="prev" href="/2024/01/03/linux%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">linux文件目录管理</a>
             
             
-            <a class="next" rel="next" href="/2023/11/20/%E5%AD%98%E5%82%A8%E4%B8%8E%E8%A3%85%E8%BD%BD/">存储与装载</a>
+            <a class="next" rel="next" href="/2024/01/03/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
             
         </section>
 
