@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="April Sky">
+
+
+
+
+
+<title>hexo安装与使用 | Hexo</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">AprilSky&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">AprilSky&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">hexo安装与使用</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">April Sky</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 7, 2025&nbsp;&nbsp;15:08:26</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><h3 id="1-1-安装node-js和npm"><a href="#1-1-安装node-js和npm" class="headerlink" title="1.1 安装node.js和npm"></a>1.1 安装node.js和npm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ <span class="built_in">sudo</span> apt install nodejs</span><br><span class="line">$ <span class="built_in">sudo</span> apt install npm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
+
+<p>npm使用命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装包</span></span><br><span class="line">$ npm install xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 属性相关</span></span><br><span class="line">$ npm config <span class="built_in">set</span> attr xxx    <span class="comment"># 设置attr属性</span></span><br><span class="line">$ npm config get attr        <span class="comment"># 获取attr属性</span></span><br><span class="line">$ npm config delete attr     <span class="comment"># 删除attr属性，改为默认</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-node-js升级"><a href="#1-2-node-js升级" class="headerlink" title="1.2 node.js升级"></a>1.2 node.js升级</h3><p>直接apt安装的<code>node.js</code>的版本一般为12.x，后续在执行<code>hexo</code>命令时会因为版本太低报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ERROR Plugin load failed: hexo-renderer-marked</span><br><span class="line">/home/xfl/blog/node_modules/marked/lib/marked.cjs:467</span><br><span class="line">    <span class="keyword">if</span> (cells.length &gt; 0 &amp;&amp; !cells.at(-1)?.trim()) &#123;</span><br><span class="line">                                          ^</span><br><span class="line"></span><br><span class="line">SyntaxError: Unexpected token <span class="string">&#x27;.&#x27;</span></span><br><span class="line">    at wrapSafe (internal/modules/cjs/loader.js:915:16)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:963:27)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:863:32)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:708:14)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:887:19)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:85:18)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/home/xfl/blog/node_modules/hexo-renderer-marked/lib/renderer.js:3:20)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:999:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:863:32)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:708:14)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:887:19)</span><br><span class="line">    at req (/home/xfl/blog/node_modules/hexo/dist/hexo/index.js:247:31)</span><br><span class="line">    at /home/xfl/blog/node_modules/hexo-renderer-marked/index.js:5:18</span><br><span class="line">    at /home/xfl/blog/node_modules/hexo/dist/hexo/index.js:255:20</span><br><span class="line">    at tryCatcher (/home/xfl/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/home/xfl/blog/node_modules/bluebird/js/release/promise.js:547:31)</span><br><span class="line">    at Promise._settlePromise (/home/xfl/blog/node_modules/bluebird/js/release/promise.js:604:18)</span><br><span class="line">    at Promise._settlePromise0 (/home/xfl/blog/node_modules/bluebird/js/release/promise.js:649:10)</span><br><span class="line">    at Promise._settlePromises (/home/xfl/blog/node_modules/bluebird/js/release/promise.js:729:18)</span><br><span class="line">    at _drainQueueStep (/home/xfl/blog/node_modules/bluebird/js/release/async.js:93:12)</span><br></pre></td></tr></table></figure>
+
+<p>所以需要将<code>node.js</code>的版本升级到14以上，可以选择使用apt升级<code>node.js</code>：</p>
+<ol>
+<li><p>卸载旧版本<code>node.js</code>包：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get remove --purge nodejs libnode-dev</span><br><span class="line">$ <span class="built_in">sudo</span> apt-get autoremove</span><br><span class="line">$ <span class="built_in">sudo</span> apt-get clean</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装<code>node.js</code> 16.x</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL https://deb.nodesource.com/setup_16.x | <span class="built_in">sudo</span> -E bash -</span><br><span class="line">$ <span class="built_in">sudo</span> apt-get install -y nodejs</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="1-3-安装hexo"><a href="#1-3-安装hexo" class="headerlink" title="1.3 安装hexo"></a>1.3 安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><strong>npm换源</strong></p>
+<p> 直接安装因为网络原因，会长时间阻塞最终失败，报错如下：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠸ idealTree:lib: sill idealTree buildDeps</span><br></pre></td></tr></table></figure>
+<p> 所以需要先进行npm换源，由默认源换成淘宝源：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改npm全局安装目录</strong></p>
+<p> 换源后会发现，安装时缺少权限，此后每次都需要加入<code>sudo</code>添加管理员权限，这是因为<code>npm</code>默认将全局包安装在<code>/usr/</code>下。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall <span class="built_in">mkdir</span></span><br><span class="line">npm ERR! path /usr/local/lib/node_modules/hexo-cli</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, <span class="built_in">mkdir</span> <span class="string">&#x27;/usr/local/lib/node_modules/hexo-cli&#x27;</span></span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, <span class="built_in">mkdir</span> <span class="string">&#x27;/usr/local/lib/node_modules/hexo-cli&#x27;</span>] &#123;</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: <span class="string">&#x27;EACCES&#x27;</span>,</span><br><span class="line">npm ERR!   syscall: <span class="string">&#x27;mkdir&#x27;</span>,</span><br><span class="line">npm ERR!   path: <span class="string">&#x27;/usr/local/lib/node_modules/hexo-cli&#x27;</span></span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you <span class="keyword">do</span> not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the <span class="built_in">command</span> again as root/Administrator.</span><br></pre></td></tr></table></figure>
+<p> 所以可以将<code>npm</code>全局包安装到用户有写权限的目录：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> ~/.npm-global</span><br><span class="line">$ npm config <span class="built_in">set</span> prefix <span class="string">&#x27;~/.npm-global&#x27;</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;export PATH=$HOME/.npm-global/bin:$PATH&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2-更换主题"><a href="#2-更换主题" class="headerlink" title="2. 更换主题"></a>2. 更换主题</h2><p>更换hexo主题需要做两步：</p>
+<ul>
+<li><p>将主题下载到<code>blog/theme/</code>目录下</p>
+<p>  主题在<a target="_blank" rel="noopener" href="https://hexo.io/themes/%E4%B8%8B%EF%BC%8C%E6%AF%8F%E4%B8%AA%E4%B8%BB%E9%A2%98%E9%83%BD%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84github%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%B0%86%E5%85%B6clone%E4%B8%8B%E6%9D%A5">https://hexo.io/themes/下，每个主题都有自己的github地址，将其clone下来</a></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/Siricee/hexo-theme-Chic.git theme/Chic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>_config.yml</code>的theme设定</p>
+<p>  注释掉原来的主题，改为clone的theme主题目录名</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="comment"># theme: landscape</span></span><br><span class="line">theme: Chic</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-Quick-Start"><a href="#3-Quick-Start" class="headerlink" title="3. Quick Start"></a>3. Quick Start</h2><h3 id="3-1-Create-a-new-post"><a href="#3-1-Create-a-new-post" class="headerlink" title="3.1 Create a new post"></a>3.1 Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="3-2-Run-server"><a href="#3-2-Run-server" class="headerlink" title="3.2 Run server"></a>3.2 Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="3-3-Generate-static-files"><a href="#3-3-Generate-static-files" class="headerlink" title="3.3 Generate static files"></a>3.3 Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="3-4-Deploy-to-remote-sites"><a href="#3-4-Deploy-to-remote-sites" class="headerlink" title="3.4 Deploy to remote sites"></a>3.4 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2025 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/hexo/"># hexo</a>
+                    
+                        <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"># 开发工具</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 2025 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
