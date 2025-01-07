@@ -52,15 +52,22 @@
         (() => {
             const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
             const isDark = currentTheme === 'dark';
-            const pagebody = document.getElementsByTagName('body')[0]
+            const pagebody = document.getElementsByTagName('body')[0];
+            const mobile_toggle_theme_element = document.getElementById("mobile-toggle-theme");
             if (isDark) {
                 pagebody.classList.add('dark-theme');
                 // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+                if (mobile_toggle_theme_element != null) {
+                    mobile_toggle_theme_element.innerText = "· Dark";
+                }
+                // document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
                 // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+                if (mobile_toggle_theme_element != null) {
+                    mobile_toggle_theme_element.innerText = "· Light"
+                }
+                // document.getElementById("mobile-toggle-theme").innerText = "· Light"
             }
         })();
     </script>
